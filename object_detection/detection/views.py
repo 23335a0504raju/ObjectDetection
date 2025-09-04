@@ -10,9 +10,14 @@ import os
 # 🔹 Ensure YOLO uses writable config directory
 os.environ['YOLO_CONFIG_DIR'] = '/tmp/ultralytics'
 
-# 🔹 Load YOLOv8 nano model once (low memory usage)
-model = YOLO("yolov8n.pt")
-model.to("cpu")  # Force CPU-only inference
+# 🔹 Lazy-load YOLOv8 nano model (low memory usage)
+model = None
+def get_model():
+    global model
+    if model is None:
+        model = YOLO("yolov8n.pt")
+        model.to("cpu")  # Force CPU-only inference
+    return model
 
 @api_view(["POST"])
 @parser_classes([MultiPartParser, FormParser])
@@ -33,18 +38,18 @@ def detect_objects(request):
         file_bytes = np.frombuffer(file.read(), np.uint8)
         image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-        # Resize to reduce memory usage
-        image = cv2.resize(image, (640, 640))
+        # 🔹 Resize to reduce memory usage
+        image = cv2.resize(image, (320, 320))
 
-        # Run YOLOv8n detection
-        results = model(image, conf=0.35, imgsz=320)  # Smaller imgsz = lower RAM usage
+        # 🔹 Run YOLOv8n detection with lower RAM usage
+        results = get_model()(image, conf=0.25, imgsz=320)
 
         detections = []
         annotated_image = results[0].plot()  # YOLO draws boxes automatically
 
         for box in results[0].boxes:
             cls_id = int(box.cls[0])
-            label = model.names[cls_id]
+            label = get_model().names[cls_id]
             conf = float(box.conf[0])
             xyxy = box.xyxy[0].tolist()  # [x1, y1, x2, y2]
 
@@ -77,5 +82,4 @@ def detect_objects(request):
         })
 
     except Exception as e:
-        # 🔹 Updated error handling
         return Response({"error": f"Detection failed: {str(e)}"}, status=500)
