@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 
 # 🔹 Load YOLOv8 model (use yolov8x for accuracy, yolov8n for speed)
-model = YOLO("yolov8x.pt")  # or "yolov8l.pt" if GPU is slow
+model = YOLO("yolov8n.pt")  # or "yolov8l.pt" if GPU is slow
 
 
 @api_view(["POST"])

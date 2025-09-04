@@ -14,7 +14,7 @@ Pillow
 
 # Machine learning / YOLO
 ultralytics
-torch  # CPU version; for GPU, replace with proper torch+cu version
+torch  # CPU version; change if using GPU
 
 # Production server
 gunicorn

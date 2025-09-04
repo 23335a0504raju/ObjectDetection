@@ -18,12 +18,12 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 
 # ----------------------------
-# Step 4: Download YOLO model if missing
+# Step 4: Download YOLO nano model if missing
 # ----------------------------
-MODEL_FILE="yolov8x.pt"
+MODEL_FILE="yolov8n.pt"
 if [ ! -f "$MODEL_FILE" ]; then
-    echo "Downloading YOLO model..."
-    curl -L -o "$MODEL_FILE" "https://ultralytics.com/assets/yolov8x.pt"
+    echo "Downloading YOLO nano model..."
+    curl -L -o "$MODEL_FILE" "https://github.com/ultralytics/assets/releases/download/v8.0.0/yolov8n.pt"
 fi
 
 # ----------------------------
