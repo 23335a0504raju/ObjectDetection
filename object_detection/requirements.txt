@@ -1,6 +1,8 @@
-Django>=4.0
+Django>=4.2
 djangorestframework
-gunicorn
-ultralytics
-opencv-python-headless
 numpy
+opencv-python-headless
+ultralytics
+torch        # or torch + torchvision (CPU or GPU version)
+Pillow       # for image handling
+gunicorn     # for production server
