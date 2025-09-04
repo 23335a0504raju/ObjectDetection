@@ -6,33 +6,32 @@ from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 
-# 🔹 Load YOLOv8 nano model for speed & low memory usage
-model = YOLO("yolov8n.pt")
-model.to("cpu")  # Force CPU-only inference
+
+# 🔹 Load YOLOv8 model (use yolov8x for accuracy, yolov8n for speed)
+model = YOLO("yolov8x.pt")  # or "yolov8l.pt" if GPU is slow
+
 
 @api_view(["POST"])
 @parser_classes([MultiPartParser, FormParser])
 def detect_objects(request):
     """
-    Object detection API using YOLOv8n
+    Object detection API using YOLOv8x
     Accepts an uploaded image and returns:
     - Annotated image (base64)
     - Detected objects (labels, confidence, bounding boxes)
     """
     try:
+        # ✅ Check for image in request
         if "image" not in request.FILES:
             return Response({"error": "No image provided"}, status=400)
 
         file = request.FILES["image"]
 
-        # Read image into OpenCV
+        # ✅ Read image into OpenCV
         file_bytes = np.frombuffer(file.read(), np.uint8)
         image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-        # Resize to reduce memory usage
-        image = cv2.resize(image, (640, 640))
-
-        # Run YOLOv8n detection
+        # ✅ Run YOLOv8 detection with confidence threshold
         results = model(image, conf=0.35)
 
         detections = []
@@ -50,27 +49,28 @@ def detect_objects(request):
                 "box": [round(x, 2) for x in xyxy]
             })
 
-        # Encode annotated image to base64
+        # ✅ Encode annotated image to base64
         _, buffer = cv2.imencode(".jpg", annotated_image)
         encoded_image = base64.b64encode(buffer).decode("utf-8")
 
         return Response({
-            "image": encoded_image,
-            "detections": {
-                "headers": ["Label", "Confidence", "X1", "Y1", "X2", "Y2"],
-                "rows": [
-                    [
-                        det["label"],
-                        det["confidence"],
-                        det["box"][0],
-                        det["box"][1],
-                        det["box"][2],
-                        det["box"][3],
-                    ]
-                    for det in detections
+        "image": encoded_image,
+        "detections": {
+            "headers": ["Label", "Confidence", "X1", "Y1", "X2", "Y2"],
+            "rows": [
+                [
+                    det["label"],
+                    det["confidence"],
+                    det["box"][0],
+                    det["box"][1],
+                    det["box"][2],
+                    det["box"][3],
                 ]
-            }
-        })
+                for det in detections
+            ]
+        }
+    })
+
 
     except Exception as e:
         return Response({"error": str(e)}, status=500)
