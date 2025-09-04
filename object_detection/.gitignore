@@ -1,0 +1,22 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment
+.env
+venv/
+env/
+*.sqlite3
+
+# Django
+/staticfiles/
+*.log
+
+# IDEs
+.vscode/
+.idea/
+
+# YOLO weights (optional: only if you want Render to auto-download)
+yolov8x.pt
+yolov8l.pt
