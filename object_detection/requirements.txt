@@ -1,8 +1,20 @@
-Django>=4.2
+# Django framework
+Django>=5.1
+
+# REST API
 djangorestframework
+
+# CORS headers
+django-cors-headers
+
+# Image handling
 numpy
 opencv-python-headless
+Pillow
+
+# Machine learning / YOLO
 ultralytics
-torch        # or torch + torchvision (CPU or GPU version)
-Pillow       # for image handling
-gunicorn     # for production server
+torch  # CPU version; for GPU, replace with proper torch+cu version
+
+# Production server
+gunicorn
