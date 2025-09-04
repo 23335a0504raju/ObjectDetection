@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { FaBriefcase, FaGithub, FaLinkedin } from "react-icons/fa";
 import './App.css';
-
 
 
 
@@ -234,9 +232,9 @@ function App() {
             <div className="footer-section">
               <h4>Connect</h4>
               <div className="social-links">
-                <a href="https://portfolio-tau-two-aijzsctxqv.vercel.app/" aria-label="Portfolio"><FaBriefcase /></a>
-                <a href="https://github.com/23335a0504raju" aria-label="GitHub"><FaGithub /></a>
-                <a href="https://www.linkedin.com/in/raju-chowdavada-06b734347" aria-label="LinkedIn"><FaLinkedin /></a>
+                <a href="#twitter" aria-label="Twitter"></a>
+                <a href="#github" aria-label="GitHub">🐙</a>
+                <a href="#linkedin" aria-label="LinkedIn">🔗</a>
               </div>
             </div>
           </div>
