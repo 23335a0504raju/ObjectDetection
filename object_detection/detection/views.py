@@ -5,8 +5,12 @@ from ultralytics import YOLO
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+import os
 
-# 🔹 Load YOLOv8 nano model for speed & low memory usage
+# 🔹 Ensure YOLO uses writable config directory
+os.environ['YOLO_CONFIG_DIR'] = '/tmp/ultralytics'
+
+# 🔹 Load YOLOv8 nano model once (low memory usage)
 model = YOLO("yolov8n.pt")
 model.to("cpu")  # Force CPU-only inference
 
@@ -14,7 +18,7 @@ model.to("cpu")  # Force CPU-only inference
 @parser_classes([MultiPartParser, FormParser])
 def detect_objects(request):
     """
-    Object detection API using YOLOv8n
+    Object detection API using YOLOv8n.
     Accepts an uploaded image and returns:
     - Annotated image (base64)
     - Detected objects (labels, confidence, bounding boxes)
@@ -33,7 +37,7 @@ def detect_objects(request):
         image = cv2.resize(image, (640, 640))
 
         # Run YOLOv8n detection
-        results = model(image, conf=0.35)
+        results = model(image, conf=0.35, imgsz=320)  # Smaller imgsz = lower RAM usage
 
         detections = []
         annotated_image = results[0].plot()  # YOLO draws boxes automatically
@@ -73,4 +77,5 @@ def detect_objects(request):
         })
 
     except Exception as e:
-        return Response({"error": str(e)}, status=500)
+        # 🔹 Updated error handling
+        return Response({"error": f"Detection failed: {str(e)}"}, status=500)

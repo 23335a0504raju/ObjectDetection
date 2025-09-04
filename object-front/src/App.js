@@ -26,7 +26,7 @@ function App() {
       setLoading(true);
       setResultImage(null);
       setDetections([]);
-
+                                    
       const res = await axios.post("https://objectdetection-diiz.onrender.com/api/detect/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         timeout: 300000, // 5 min max

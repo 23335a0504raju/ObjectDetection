@@ -29,4 +29,8 @@ fi
 # ----------------------------
 # Step 5: Start Gunicorn server
 # ----------------------------
-gunicorn object_detection.wsgi:application --bind 0.0.0.0:$PORT
+# Increase timeout, use 1 worker for low memory
+gunicorn object_detection.wsgi:application \
+    --bind 0.0.0.0:$PORT \
+    --workers 1 \
+    --timeout 120
