@@ -88,22 +88,12 @@ Users can upload images, and the app returns annotated images with bounding boxe
 
 **🤝 Contributing**
 
-Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to improve.
+   Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to improve.
 
 **📜 License**
 
-This project is licensed under the MIT License.
+   This project is licensed under the MIT License.
 
 **👨‍💻 Author**
-
-Chowdavada Raju
-
-LinkedIn
-
-GitHub
-
-Portfolio
-
-Do you also want me to add a **short LinkedIn-style 2–3 line description** (punchy + keyword-heavy) that you can paste directly into your LinkedIn or portfolio under this project?
-
+   Chowdavada Raju
 
