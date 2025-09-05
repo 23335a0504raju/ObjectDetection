@@ -39,84 +39,62 @@ Users can upload images, and the app returns annotated images with bounding boxe
 
 ---
 
-## 📸 Screenshots
-_Add screenshots of app UI and sample detection results here._  
 
----
-
-## 🚀 Deployment
-The project is deployed on **Render**:  
-- Backend served with **Gunicorn** for production.  
-- Frontend deployed as a static site with React build.  
-
-├── backend/ # Django REST API with YOLOv8
-│ ├── models/ # YOLOv8 model integration
-│ ├── utils/ # Image processing (OpenCV, Pillow, NumPy)
-│ └── api/ # REST endpoints
-├── frontend/ # React.js frontend
-│ ├── src/ # Components, pages, services
-│ └── public/ # Static assets
-└── README.md
+## 📂 Project Structure
+   ├── backend/ # Django REST API with YOLOv8
+   │ ├── models/ # YOLOv8 model integration
+   │ ├── utils/ # Image processing (OpenCV, Pillow, NumPy)
+   │ └── api/ # REST endpoints
+   ├── frontend/ # React.js frontend
+   │ ├── src/ # Components, pages, services
+   │ └── public/ # Static assets
+   └── README.md
 
 
 ---
 
 ## 🔧 Installation (Local Setup)
+
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/object-detection-webapp.git
+   git clone [https://github.com/23335a0504raju/object-detection-webapp.git](https://github.com/23335a0504raju/ObjectDetection/)
    cd object-detection-webapp
 
+2. **Backend Setup (Django + YOLOv8)**
+   cd backend
+   pip install -r requirements.txt
+   python manage.py runserver
 
-Backend Setup (Django + YOLOv8)
+3. **Frontend Setup (React)**
+   cd frontend
+   npm install
+   npm start
+4. **Access the app at:**
+   Frontend: http://localhost:3000
+   Backend API: http://127.0.0.1:8000/api/
+ **🏅 Learning Outcomes**
 
-cd backend
-pip install -r requirements.txt
-python manage.py runserver
+   Integrated YOLOv8 object detection with a Django REST API 
+   Handled real-time image processing on a web server 
+   Deployed a full-stack ML application on Render
+   Improved skills in cloud deployment, API design, and frontend-backend communication
 
+**📌 Future Improvements**
 
-Frontend Setup (React)
+   Add support for video stream detection
+   Implement user authentication & history tracking
+   Optimize inference with GPU support
+   Enhance UI with detection statistics & charts
 
-cd frontend
-npm install
-npm start
-
-
-Access the app at:
-
-Frontend: http://localhost:3000
-
-Backend API: http://127.0.0.1:8000/api/
-
-🏅 Learning Outcomes
-
-Integrated YOLOv8 object detection with a Django REST API
-
-Handled real-time image processing on a web server
-
-Deployed a full-stack ML application on Render
-
-Improved skills in cloud deployment, API design, and frontend-backend communication
-
-📌 Future Improvements
-
-Add support for video stream detection
-
-Implement user authentication & history tracking
-
-Optimize inference with GPU support
-
-Enhance UI with detection statistics & charts
-
-🤝 Contributing
+**🤝 Contributing**
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to improve.
 
-📜 License
+**📜 License**
 
 This project is licensed under the MIT License.
 
-👨‍💻 Author
+**👨‍💻 Author**
 
 Chowdavada Raju
 
@@ -126,17 +104,6 @@ GitHub
 
 Portfolio
 
-
----
-
-🔥 This README is recruiter- and dev-friendly:  
-- Highlights **tech stack** (good for ATS/keywords).  
-- Explains **impact + learning outcomes**.  
-- Clean structure for GitHub.  
-
-Do you also want me to prepare a **short LinkedIn-style project description** (2–3 lines) so you can use it as a portfolio summary without the long README?
+Do you also want me to add a **short LinkedIn-style 2–3 line description** (punchy + keyword-heavy) that you can paste directly into your LinkedIn or portfolio under this project?
 
 
----
-
-## 📂 Project Structure
